@@ -1,4 +1,6 @@
 ---
+variant: fcos
+version: 1.3.0
 storage:
   files:
     - filesystem: "root"
@@ -403,6 +405,7 @@ passwd:
 systemd:
   units:
     - name: etcd-member.service
+      enabled: true
       dropins:
         - name: conf1.conf
           contents: |
@@ -436,8 +439,6 @@ systemd:
             #Environment=##HTTPS_PROXY1#
             #Environment=no_proxy=localhost,127.0.0.0/8,127.0.0.1,::1,#NODE1_IP#,#NODE2_IP#,#NODE3_IP#,#NODE1#,#NODE2#,#NODE3#,#NODE1#.#DOMAIN#,#NODE2#.#DOMAIN#,#NODE3#.#DOMAIN#,/var/run/docker.sock
 
-    - name: etcd-member.service
-      enable: true
 
     - name: flanneld.service
       dropins:
@@ -453,14 +454,11 @@ systemd:
             ExecStartPre=/usr/bin/rkt trust --skip-fingerprint-review --prefix=coreos.com/rkt/stage1-coreos
             ExecStartPre=/usr/bin/rkt image fetch coreos.com/rkt/stage1-coreos:1.29.0
             Restart=always
-
-    - name: flanneld.service
-      dropins:
         - name: 50-ssl.conf
           contents: |
             [Service]
             Environment="ETCD_SSL_DIR=#SSL_DIR#"
-
+        
     - name: etcd-member-config.service
       enabled: true
       contents: |

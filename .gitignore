@@ -6,6 +6,23 @@ __pycache__/
 # C extensions
 *.so
 
+
+# coreos-kubernetes-generator user files
+/app/coreos-kubernetes-generator/work
+/app/coreos-kubernetes-generator/tmp
+/app/coreos-kubernetes-generator/configs
+/app/coreos-kubernetes-generator/manifests
+/app/coreos-kubernetes-generator/keys
+/app/coreos-kubernetes-generator/ssl
+
+# vim sw[
+*.swp
+
+# project files
+.project
+.pydevproject
+
+
 # Distribution / packaging
 .Python
 env/
